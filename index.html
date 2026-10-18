@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Character and Word Counter</title>
+<style>
+body{
+ font-family: Arial;
+ background: #f2f2f2;
+ text-align: center;
+}
+.box{
+ background: white;
+ width: 350px;
+ margin: 40px auto;
+ padding: 20px;
+ border-radius: 10px;
+ border: 1px solid black;
+}
+h2{ margin-bottom: 15px; }
+textarea{
+ width: 95%;
+ height: 120px;
+ padding: 10px;
+ font-size: 14px;
+}
+.counts{
+ margin-top: 15px;
+ text-align: left;
+ background: #eee;
+ padding: 10px;
+ border-radius: 5px;
+}
+p{ margin: 5px 0; }
+</style>
+</head>
+<body>
+
+<h2>Character and Word Counter</h2>
+
+<div class="box">
+ <textarea id="text" placeholder="Type here..." oninput="count()"></textarea>
+
+ <div class="counts">
+  <p>Characters: <span id="char">0</span></p>
+  <p>Words: <span id="word">0</span></p>
+  <p>Sentences: <span id="sentence">0</span></p>
+ </div>
+</div>
+
+<script>
+function count(){
+ let text = document.getElementById("text").value;
+
+ // char count
+ document.getElementById("char").innerText = text.length;
+
+ // word count - trim then split by whitespace
+ let trimmed = text.trim();
+ if(trimmed === ""){
+  document.getElementById("word").innerText = 0;
+ } else {
+  let words = trimmed.split(/\s+/);
+  document.getElementById("word").innerText = words.length;
+ }
+
+ // sentence count - split by . ! ?
+ let sentences = text.split(/[.!?]+/).filter(s => s.trim() !== "");
+ document.getElementById("sentence").innerText = sentences.length;
+}
+</script>
+
+</body>
+</html>
